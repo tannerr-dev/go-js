@@ -7,7 +7,18 @@ import (
 	"frontendmasters.com/movies/models"
 )
 
-type MovieHandler struct{}
+type MovieHandler struct {
+	// TODO
+}
+
+func (h *MovieHandler) writeJSONResponse(w http.ResponseWriter,
+	data interface{}) {
+	w.Header().Set("Content-Type", "application/json")
+	if err := json.NewEncoder(w).Encode(data); err != nil {
+		// TODO: Log error
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	}
+}
 
 func (h *MovieHandler) GetTopMovies(w http.ResponseWriter, r *http.Request) {
 	movies := []models.Movie{
@@ -30,9 +41,30 @@ func (h *MovieHandler) GetTopMovies(w http.ResponseWriter, r *http.Request) {
 			Casting:     []models.Actor{{ID: 1, FirstName: "Max"}},
 		},
 	}
-	w.Header().Set("Content-Type", "application/json")
-	if err := json.NewEncoder(w).Encode(movies); err != nil {
-		// TODO: Log error
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	h.writeJSONResponse(w, movies)
+}
+
+func (h *MovieHandler) GetRandomMovies(w http.ResponseWriter, r *http.Request) {
+	movies := []models.Movie{
+		{
+			ID:          1,
+			TMDB_ID:     181,
+			Title:       "The Hacker Random",
+			ReleaseYear: 2022,
+			Genres:      []models.Genre{{ID: 1, Name: "Thriller"}},
+			Keywords:    []string{},
+			Casting:     []models.Actor{{ID: 1, FirstName: "Max"}},
+		},
+		{
+			ID:          2,
+			TMDB_ID:     181,
+			Title:       "Back to the Future Random",
+			ReleaseYear: 1984,
+			Genres:      []models.Genre{{ID: 1, Name: "Thriller"}},
+			Keywords:    []string{},
+			Casting:     []models.Actor{{ID: 1, FirstName: "Max"}},
+		},
 	}
+	h.writeJSONResponse(w, movies)
+
 }
