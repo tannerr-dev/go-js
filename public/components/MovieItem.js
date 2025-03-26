@@ -1,19 +1,19 @@
-export class MovieItemComponent extend HTMLElement {
-    constructor(movie){
+export class MovieItemComponent extends HTMLElement {
+    constructor(movie) {
         super();
         this.movie = movie;
     }
-    connectedCallback(){
+
+    connectedCallback() {
         this.innerHTML = `
-            <a href="#"
+            <a href="#">
                 <article>
                     <img src="${this.movie.poster_url}" 
-                        alt="${this.movie.title} Poster"
-                    >
+                        alt="${this.movie.title} Poster">
                     <p>${this.movie.title} (${this.movie.release_year})</p>
                 </article>
             </a>
-        `
+        `;
     }
 }
 

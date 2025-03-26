@@ -1,27 +1,31 @@
-import {API} =  from "../services/API.js"
-export class HomePage extends HTMLElement  {
-    async render(){
-        const topMovies = await API.getTopMovies()
-        renderMoviesInList(topMovies, document.querySelector("top-10"));
-        
-        const topMovies = await API.getRandomMovies()
-        renderMoviesInList(topMovies, document.querySelector("random"));
-        
+import { API } from "../services/API.js";
+import { MovieItemComponent } from "./MovieItem.js";
 
-        function renderMoviesInList(movies, ul){
+export class HomePage extends HTMLElement {  // <home-page>
+
+    async render() {
+        const topMovies = await API.getTopMovies()
+        renderMoviesInList(topMovies, document.querySelector("#top-10 ul"));
+
+        const randomMovies = await API.getRandomMovies()
+        renderMoviesInList(randomMovies, document.querySelector("#random ul"));
+
+        function renderMoviesInList(movies, ul) {
             ul.innerHTML = "";
-            movies.forEach(
+            movies.forEach(movie => {
                 const li = document.createElement("li");
-                li.textContent = movie.title;
+                li.appendChild(new MovieItemComponent(movie));
                 ul.appendChild(li);
-            )
+            });
         }
     }
-    connectedCallback(){
-        const template = document.getElementById("template-home")
+
+    connectedCallback() {
+        const template = document.getElementById("template-home");
         const content = template.content.cloneNode(true);
         this.appendChild(content);
-        this.render()
+
+        this.render();
     }
 }
 

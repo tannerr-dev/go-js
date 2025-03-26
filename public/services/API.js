@@ -11,7 +11,7 @@ export const API = {
     },
     searchMovies: async (q, order, genre)=>{
         return await API.fetch(`movies/search/`, {q, order, genre})
-    }
+    },
     fetch: async (serviceName, args)=> {
         try{
             const queryString = args ? new URLSearchParams(args).toString: "";
