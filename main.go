@@ -16,6 +16,7 @@ import (
 
 func initializeLogger() *logger.Logger {
 	logInstance, err := logger.NewLogger("movie.log")
+	// logInstance.Error("Hello from the Error system", nil)
 	if err != nil {
 		log.Fatalf("Failed to initialice logger $v", err)
 	}
@@ -23,10 +24,15 @@ func initializeLogger() *logger.Logger {
 	return logInstance
 }
 
+
+
+
 func main() {
+
+	// Log Initializer
 	logInstance := initializeLogger()
 
-	// Load .env file
+	// Load .env file, this mergest .env into the os env variables
 	if err := godotenv.Load(); err != nil {
 		log.Printf("No .env file found or failed to load: %v", err)
 	}
@@ -42,18 +48,23 @@ func main() {
 	}
 	defer db.Close()
 
+
+
 	// Initialize Data Repository for Movies
 	movieRepo, err := data.NewMovieRepository(db, logInstance)
 	if err != nil {
 		log.Fatalf(("Failed to initialize repository"))
 	}
 
-	movieHandler := handlers.MovieHandler{}
-	movieHandler.Storage = movieRepo
-	movieHandler.Logger = logInstance
+	//Handlers
+	movieHandler := handlers.NewMovieHandler(movieRepo, logInstance)
 
 	http.HandleFunc("/api/movies/top/", movieHandler.GetTopMovies)
 	http.HandleFunc("/api/movies/random/", movieHandler.GetRandomMovies)
+	http.HandleFunc("/api/movies/search/", movieHandler.SearchMovies)
+	http.HandleFunc("/api/movies/", movieHandler.GetMovie) // api/movies/140
+	http.HandleFunc("/api/genres/", movieHandler.GetGenres)
+
 
 	// Handler for static files (frontend)
 	http.Handle("/", http.FileServer(http.Dir("public")))

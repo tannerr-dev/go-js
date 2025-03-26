@@ -1,4 +1,53 @@
 <!DOCTYPE html>
-<title>Hello from Go</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReelingIt - Movies</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="app.webmanifest">
+    <link rel="icon" href="images/icon.png">
 
-<h1>Hello from Go using Air</h1>
+    <script src="app.js" type="module" defer></script>
+
+</head>
+<body>
+    <header>
+        <h1><img src="images/logo.png" height="35" alt="ReelingIt"></h1>
+        <nav>
+            <ul>
+                <li><a class="navlink" href="/">Movies</a></li>
+                <li><a class="navlink" href="/account/favorites">Favorites</a></li>
+                <li><a class="navlink" href="/account/watchlist">Watchlist</a></li>
+                <li><a class="navlink" href="/account/">My Account</a></li>
+            </ul>
+        </nav>
+        <div>
+            <form onsubmit="app.search(event)">
+                <input type="search" placeholder="Search movies">
+            </form>
+        </div>
+    </header>
+    <main>
+        <home-page></home-page>
+    </main>
+
+    <!-- Templates -->
+     <template id="template-home">
+        <section class="vertical-scroll" id="top-10">
+            <h2>This Week's Top Movies</h2>
+            <ul>
+            </ul>
+        </section>
+        <section class="vertical-scroll" id="random">
+            <h2>Something to watch today</h2>
+            <ul>
+            </ul>
+        </section>
+     </template>
+
+    <footer>
+        <p>(C) ReelingIt - FrontendMasters.com</p>
+    </footer>
+</body>
+</html>

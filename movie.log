@@ -1,0 +1,2 @@
+ERROR: 2025/03/25 19:53:00 logger.go:35: Hello from the Error system: <nil>
+ERROR: 2025/03/25 19:53:11 logger.go:35: Hello from the Error system: <nil>
