@@ -18,7 +18,7 @@ export class MovieDetailsPage extends HTMLElement {
         this.querySelector("h2").textContent = this.movie.title;
         this.querySelector("h3").textContent = this.movie.tagline;
         this.querySelector("img").src = this.movie.poster_url;
-        this.querySelector("#overview").src = this.movie.overview;
+        this.querySelector("#overview").textContent= this.movie.overview;
         this.querySelector("#metadata").innerHTML = `
             <dt>Release Year</dt>
             <dd>${this.movie.release_year}</dd>
@@ -27,6 +27,25 @@ export class MovieDetailsPage extends HTMLElement {
             <dt>Popularity</dt>
             <dd>${this.movie.popularity}</dd>
         `
+
+        const ulGenres = this.querySelector("#genres");
+        ulGenres.innerHTML = "";
+        this.movie.genres.forEach(genre => {
+            const li = document.createElement("li");
+            li.textContent = genre.name;
+            ulGenres.appendChild(li);
+        });
+
+        const ulCast = this.querySelector("#cast");
+        ulCast.innerHTML = "";
+        this.movie.casting.forEach(actor => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <img src="${actor.image_url ?? '/images/generic_actor.jpg'}" alt="Picture of ${actor.last_name}">
+                <p>${actor.first_name} ${actor.last_name}</p>
+            `;
+            ulCast.appendChild(li);
+        });
     }
 
     connectedCallback(){
