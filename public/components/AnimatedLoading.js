@@ -20,4 +20,4 @@ class AnimatedLoading extends HTMLElement {
     }
 }
 
-customElements.define("animated-loading", AnigatedLoading)
+customElements.define("animated-loading", AnimatedLoading)
