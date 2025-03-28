@@ -14,10 +14,10 @@ export class MovieDetailsPage extends HTMLElement {
         const template = document.getElementById("template-movie-details")
         const content = template.content.cloneNode(true);
         this.appendChild(content)
-
         this.querySelector("h2").textContent = this.movie.title;
         this.querySelector("h3").textContent = this.movie.tagline;
         this.querySelector("img").src = this.movie.poster_url;
+        this.querySelector("#trailer").dataset.url = this.movie.trailer_url;
         this.querySelector("#overview").textContent= this.movie.overview;
         this.querySelector("#metadata").innerHTML = `
             <dt>Release Year</dt>
@@ -26,7 +26,7 @@ export class MovieDetailsPage extends HTMLElement {
             <dd>${this.movie.score} / 10</dd>
             <dt>Popularity</dt>
             <dd>${this.movie.popularity}</dd>
-        `
+        `;
 
         const ulGenres = this.querySelector("#genres");
         ulGenres.innerHTML = "";
