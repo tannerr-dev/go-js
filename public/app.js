@@ -5,8 +5,8 @@ import "./components/AnimatedLoading.js";
 import "./components/YouTubeEmbed.js";
 
 window.addEventListener("DOMContentLoaded", event => {
-    // document.querySelector("main").appendChild(new HomePage())
-    document.querySelector("main").appendChild(new MovieDetailsPage())
+    document.querySelector("main").appendChild(new HomePage())
+    // document.querySelector("main").appendChild(new MovieDetailsPage())
 });
 
 window.app = {
