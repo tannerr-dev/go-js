@@ -24,11 +24,7 @@ func initializeLogger() *logger.Logger {
 	return logInstance
 }
 
-
-
-
 func main() {
-
 	// Log Initializer
 	logInstance := initializeLogger()
 
@@ -47,8 +43,6 @@ func main() {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
 	defer db.Close()
-
-
 
 	// Initialize Data Repository for Movies
 	movieRepo, err := data.NewMovieRepository(db, logInstance)
@@ -83,5 +77,4 @@ func main() {
 		log.Fatalf("Server failed: %v", err)
 		logInstance.Error("Server failed", err)
 	}
-
 }

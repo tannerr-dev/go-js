@@ -16,6 +16,14 @@ window.addEventListener("DOMContentLoaded", event => {
 
 window.app = {
     Router, // same as Router: Router; // js shortcut
+    showError: (message="There was an error.", goToHome=true)=>{
+        document.getElemenById("alert-model").showModal()
+        document.qeurySelector("#alert-modal p").textContent = message;
+        if (goToHome) app.Router.go("/");
+    },
+    closeError: ()=>{
+        document.getElemenById("alert-model").closeModal()
+    },
     search: (event)=> {
         event.preventDefault()
         const q = document.querySelector("input[type=search]").value;

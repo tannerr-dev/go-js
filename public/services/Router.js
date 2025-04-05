@@ -41,12 +41,29 @@ export const Router = {
                 }
             }
         }
+
         if(pageElement == null){
             pageElement = document.createElement("h1");
             pageElement.textContent = "Page not found :(";
         }
+
         // i have  a page for the current URL
-        document.querySelector("main").innerHTML = "";
-        document.querySelector("main").appendChild(pageElement);
+        // inserting new page into the UI
+        const oldPage = document.querySelector("main").firstElementChild;
+        if (oldPage) oldPage.style.viewTransitionName = "old";
+        pageElement.style.viewTransitionName = "new";
+
+        //page transitions
+        function updatePage(){
+            document.querySelector("main").innerHTML = "";
+            document.querySelector("main").appendChild(pageElement);
+        }
+        if (!document.startViewTransition){
+            updatePage();
+        } else {
+            document.startViewTransition(()=>{
+                updatePage();
+            });
+        }
     },
-}
+};
