@@ -16,18 +16,18 @@ window.addEventListener("DOMContentLoaded", event => {
 
 window.app = {
     Router, // same as Router: Router; // js shortcut
+    API,
     showError: (message="There was an error.", goToHome=true)=>{
-        document.getElemenById("alert-model").showModal()
-        document.qeurySelector("#alert-modal p").textContent = message;
+        document.getElementById("alert-modal").showModal()
+        document.querySelector("#alert-modal p").textContent = message;
         if (goToHome) app.Router.go("/");
     },
     closeError: ()=>{
-        document.getElemenById("alert-model").closeModal()
+        document.getElementById("alert-modal").close()
     },
     search: (event)=> {
         event.preventDefault()
         const q = document.querySelector("input[type=search]").value;
-        // todo
+        app.Router.go("/movies?q=" + q);
     },
-    api: API
 }
