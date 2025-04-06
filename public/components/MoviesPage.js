@@ -29,6 +29,20 @@ export class MoviesPage extends HTMLElement {
 
     }
 
+    async loadGenres() {
+        const genres = await API.getGenres();
+        const select = this.querySelector("select#filter")
+        select.innerHTML= `
+            <option>Filter by Genre</option>
+        `;
+        genres.forEach(genre=>{
+            var option = document.createElement("option");
+            option.value = genre.id;
+            option.textContent = genre.name;
+            select.appendChild(option)
+        })
+    }
+
 
     connectedCallback() {
         const template = document.getElementById("template-movies");
@@ -43,6 +57,8 @@ export class MoviesPage extends HTMLElement {
         } else {
             app.showError();
         }
+
+        this.loadGenres()
     }
 }
 // you dont really have to register componenet elements if you are only using the from 

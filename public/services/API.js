@@ -9,6 +9,9 @@ export const API = {
     getMovieById: async (id)=>{
         return await API.fetch(`movies/${id}`)
     },
+    getGenres: async (id)=>{
+        return await API.fetch("genres/")
+    },
     searchMovies: async (q, order, genre)=>{
         return await API.fetch(`movies/search/`, {q, order, genre})
     },
