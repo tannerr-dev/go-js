@@ -1,7 +1,7 @@
-import API from "../services/API.js";
+import {API} from "../services/API.js";
 import { MovieItemComponent } from "./MovieItem.js";
 
-export default class MoviesPage extends HTMLElement {
+export class MoviesPage extends HTMLElement {
     
     async render(query) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -44,7 +44,6 @@ export default class MoviesPage extends HTMLElement {
             app.showError();
         }
     }
-}
 }
 // you dont really have to register componenet elements if you are only using the from 
 // the router??
